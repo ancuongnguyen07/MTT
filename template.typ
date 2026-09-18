@@ -1,6 +1,8 @@
-
-
 #import "@preview/elembic:1.1.1" as e: field, element
+
+// zebraw package for showing code snippets
+#import "@preview/zebraw:0.6.3": *
+#show: zebraw
 
 // set up constants
 #let VSPACE = 0.3cm
@@ -30,7 +32,9 @@
   size: 12pt,
   font: "New Computer Modern",
 )
-#show heading: set block(above: 1.4em, below: 1em)
+
+#set heading(numbering: "1.")
+#show heading: set block(above: 1.4em, below: 1em) 
 
 #show title: set text(size: 20pt)
 #show title: set align(center)
@@ -39,9 +43,44 @@
 #show link: underline
 
 #show cite: set text(fill: blue)
+#show figure: set align(center)
+
+#show ref: set text(fill: blue)
+
+// including the following setting for proper indention
+#set par(
+  leading: 0.55em,
+  spacing: 0.55em,
+  first-line-indent: INDENTSPACE,
+  linebreaks: auto,
+  justify: true,
+)
 
 #let author(name) = align(center, text(size: 14pt, name))
 #let subtitle(tit) = align(center, text(size: 16pt, tit))
+
+#set table(
+  inset: (right: 1.5em),
+)
+
+#let mytable(..args) = {
+  show table.cell: it => {
+    if it.x == 0 or it.y == 0 {
+      set text(white)
+      strong(it)
+    } else if it.body == [] {
+      pad(..it.inset)[_N/A_]
+    } else {
+      it
+    }
+  }
+  table(
+    fill: (x,y) => {
+      if x == 0 or y == 0 {gray}
+    },
+    ..args
+  )
+}
 
 
 // Title
