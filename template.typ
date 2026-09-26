@@ -43,7 +43,11 @@
 #show link: underline
 
 #show cite: set text(fill: blue)
+
+// #show rules for #figure
 #show figure: set align(center)
+#show figure: set block(breakable: true)
+#show figure.where(kind: table): set figure.caption(position: top)
 
 #show ref: set text(fill: blue)
 
